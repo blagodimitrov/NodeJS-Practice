@@ -1,5 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
+require('dotenv').config();
+
+const passURI = process.env.DB_PASS;
+const userURI = process.env.DB_USER;
+const dbURI = `mongodb+srv://${userURI}:${passURI}@blogger.90kvsax.mongodb.net/?retryWrites=true&w=majority&appName=Blogger`;
 
 const app = express();
 
