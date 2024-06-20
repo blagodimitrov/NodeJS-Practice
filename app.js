@@ -7,17 +7,31 @@ app.set('view engine', 'ejs');
 app.listen(3000);
 
 app.get('/', (req, res) => {
-  res.sendFile('./views/index.html', { root: __dirname });
+  const blogs = [
+    {
+      title: 'Yoshi finds eggs',
+      snippet: 'Lorem ipsum dolor sit amet consectetur',
+    },
+    {
+      title: 'Mario finds stars',
+      snippet: 'Lorem ipsum dolor sit amet consectetur',
+    },
+    {
+      title: 'How to defeat bowser',
+      snippet: 'Lorem ipsum dolor sit amet consectetur',
+    },
+  ];
+  res.render('index.ejs', { title: 'Home', blogs });
 });
 
 app.get('/about', (req, res) => {
-  res.sendFile('./views/about.html', { root: __dirname });
+  res.render('about.ejs', { title: 'About' });
 });
 
-app.get('/about-us', (req, res) => {
-  res.redirect('/about');
+app.get('/blogs/create', (req, res) => {
+  res.render('create.ejs', { title: 'Create Blog' });
 });
 
 app.use((req, res) => {
-  res.status(404).sendFile('./views/404.html', { root: __dirname });
+  res.status(404).render('404.ejs', { title: '404 Error' });
 });
